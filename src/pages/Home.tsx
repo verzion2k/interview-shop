@@ -40,10 +40,6 @@ export const Home: React.FC = () => {
     return;
   }
 
-  if (productsLoading || categoriesLoading) {
-    return <Loading />;
-  }
-
   return (
     <>
       <Stack direction="row" spacing={2} mt={2}>
@@ -58,7 +54,9 @@ export const Home: React.FC = () => {
         </Button>
       </Stack>
 
-      {!isSearching || !searchTerm ? (
+      {productsLoading || categoriesLoading ? (
+        <Loading />
+      ) : !isSearching || !searchTerm ? (
         <CategoryView
           products={products}
           findCategoryParentPath={findCategoryParentPath}

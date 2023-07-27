@@ -1,5 +1,6 @@
 import { AddNewCategory } from "@components/admin/AddNewCategory";
 import { AddNewProduct } from "@components/admin/AddNewProduct";
+import { Loading } from "@components/ui/Loading";
 import { Box } from "@mui/material";
 import { createCategory } from "@services/create-category";
 import { createProduct } from "@services/create-product";
@@ -29,7 +30,7 @@ export const Admin: React.FC = () => {
   }
 
   if (loading) {
-    return "...";
+    return <Loading />;
   }
 
   return (

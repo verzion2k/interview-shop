@@ -1,3 +1,10 @@
+import { Box } from "@mui/material";
+import CircularProgress from "@mui/material/CircularProgress";
+
 export const Loading: React.FC = () => {
-  return <p>...Loading</p>;
+  return (
+    <Box sx={{ display: "flex" }}>
+      <CircularProgress />
+    </Box>
+  );
 };
