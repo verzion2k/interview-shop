@@ -1,5 +1,5 @@
 import { Cart } from "@components/cart/Cart";
-import { CartProvider } from "@components/contexts/CartContext";
+import { CartProvider } from "src/contexts/CartContext";
 import { AppBar, Stack, Toolbar, Typography } from "@mui/material";
 import { Link, Outlet } from "react-router-dom";
 

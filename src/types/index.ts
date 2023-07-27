@@ -26,9 +26,28 @@ export interface ProductList {
   children: (ProductList | Product)[];
 }
 
+export interface CartItem {
+  product: Product;
+  quantity: number;
+}
 export interface CartContextType {
-  cartItems: Product[];
+  cartItems: { [productId: number]: CartItem };
   addToCart: (product: Product) => void;
   removeFromCart: (productId: number) => void;
   clearCart: () => void;
 }
+
+export type CreateProductData = {
+  name: string;
+  price: number;
+  parent: string;
+};
+
+export interface CreateCategoryData {
+  name: string;
+  parent: string;
+}
+
+export type CategoryTree = Category & {
+  subcategories?: CategoryTree[];
+};

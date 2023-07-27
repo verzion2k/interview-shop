@@ -1,4 +1,4 @@
-import { CartContext } from "@components/contexts/CartContext";
+import { CartContext } from "src/contexts/CartContext";
 import { useContext } from "react";
 import { CartContextType } from "src/types";
 

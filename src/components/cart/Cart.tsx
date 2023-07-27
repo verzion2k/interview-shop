@@ -8,10 +8,12 @@ import {
   styled,
   Box,
   Button,
+  Stack,
 } from "@mui/material";
 import { Fragment, useCallback, useState } from "react";
 import { useCart } from "src/hooks/useCart";
 import { CartItem } from "./CartItem";
+import CartSummary from "./CartSummary";
 
 const StyledBadge = styled(Badge)<BadgeProps>(({ theme }) => ({
   "& .MuiBadge-badge": {
@@ -43,7 +45,10 @@ export const Cart: React.FC = () => {
   return (
     <>
       <IconButton onClick={handleClick}>
-        <StyledBadge badgeContent={cartItems.length} color="secondary">
+        <StyledBadge
+          badgeContent={Object.keys(cartItems).length}
+          color="secondary"
+        >
           <ShoppingCartIcon />
         </StyledBadge>
       </IconButton>
@@ -58,21 +63,29 @@ export const Cart: React.FC = () => {
           horizontal: "left",
         }}
       >
-        {cartItems.length > 0 ? (
-          <Box>
-            {cartItems.map((product) => {
+        {Object.keys(cartItems).length > 0 ? (
+          <Box minWidth={250} minHeight={50}>
+            {Object.values(cartItems).map(({ product, quantity }) => {
               return (
                 <Fragment key={product.name}>
-                  <CartItem productId={product.id} productName={product.name} />
+                  <CartItem product={product} quantity={quantity} />
                 </Fragment>
               );
             })}
+            <CartSummary />
             <Button variant="text" onClick={clearCart}>
               Remove all
             </Button>
           </Box>
         ) : (
-          <Typography>Cart is empty</Typography>
+          <Stack
+            minWidth={250}
+            minHeight={50}
+            justifyContent="center"
+            alignItems="center"
+          >
+            <Typography>Cart is empty</Typography>
+          </Stack>
         )}
       </Popover>
     </>

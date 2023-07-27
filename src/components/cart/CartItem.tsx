@@ -1,20 +1,23 @@
 import { useCart } from "src/hooks/useCart";
-import RemoveShoppingCartIcon from "@mui/icons-material/RemoveShoppingCart";
+import RemoveIcon from "@mui/icons-material/Remove";
+import AddIcon from "@mui/icons-material/Add";
 import { Stack, IconButton, Typography, Box } from "@mui/material";
+import { Product } from "src/types";
 
 export interface CartItemProps {
-  productName: string;
-  productId: number;
+  product: Product;
+  quantity: number;
 }
 
-export const CartItem: React.FC<CartItemProps> = ({
-  productName,
-  productId,
-}) => {
-  const { removeFromCart } = useCart();
+export const CartItem: React.FC<CartItemProps> = ({ product, quantity }) => {
+  const { removeFromCart, addToCart } = useCart();
 
   const handleRemoveProductFromCart = () => {
-    removeFromCart(productId);
+    removeFromCart(product.id);
+  };
+
+  const handleAddProductToCart = () => {
+    addToCart(product);
   };
 
   return (
@@ -25,14 +28,17 @@ export const CartItem: React.FC<CartItemProps> = ({
       alignItems="center"
       justifyContent="space-between"
       px={2}
-      py={1}
+      py={2}
     >
-      <Box>
-        <Typography>{productName}</Typography>
-        <Typography>{1}</Typography>
-      </Box>
       <IconButton onClick={handleRemoveProductFromCart}>
-        <RemoveShoppingCartIcon />
+        <RemoveIcon />
+      </IconButton>
+      <Box>
+        <Typography textAlign="center">{product.name}</Typography>
+        <Typography textAlign="center">{`Quantity: ${quantity}`}</Typography>
+      </Box>
+      <IconButton onClick={handleAddProductToCart}>
+        <AddIcon />
       </IconButton>
     </Stack>
   );

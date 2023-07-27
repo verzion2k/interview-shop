@@ -8,33 +8,21 @@ import {
 } from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { useCart } from "src/hooks/useCart";
-import { CreateProductData, createProduct } from "@services/create-product";
+import { FindProductParentPath } from "src/hooks/useFindProductPath";
 
 export interface ProductItemProps {
   product: Product;
+  findProductParentPath: FindProductParentPath;
 }
 
-export const ProductItem: React.FC<ProductItemProps> = ({ product }) => {
+export const ProductItem: React.FC<ProductItemProps> = ({
+  product,
+  findProductParentPath,
+}) => {
   const { addToCart } = useCart();
 
   const handleAddProductToCart = () => {
-    handleCreateProduct();
     addToCart(product);
-  };
-
-  const handleCreateProduct = async () => {
-    try {
-      const productData: CreateProductData = {
-        name: "New Product",
-        price: 100,
-        parent: "Some Category", // Replace with the category name for the new product
-      };
-
-      const newProductId = await createProduct(productData);
-      console.log("New product created with ID:", newProductId);
-    } catch (error) {
-      console.error("Error creating product:", error);
-    }
   };
 
   return (
@@ -43,7 +31,9 @@ export const ProductItem: React.FC<ProductItemProps> = ({ product }) => {
         <Typography variant="h5" component="div">
           {product.name}
         </Typography>
-        <Typography variant="body2">TODO: parent path</Typography>
+        <Typography variant="body2">
+          {findProductParentPath(product.id)}
+        </Typography>
         <Typography variant="body2">{product.price}</Typography>
       </CardContent>
       <CardActions>

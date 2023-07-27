@@ -3,9 +3,11 @@ import { Category } from "src/types";
 
 type GetCategoriesResponse = { data: Category[] };
 
+export type GetCategories = () => Promise<Category[]>;
+
 const URL = `${process.env.API_BASE_URL}categories`;
 
-export const getCategories = async (): Promise<Category[]> => {
+export const getCategories: GetCategories = async () => {
   try {
     const {
       data: { data },
