@@ -1,4 +1,10 @@
-import { Input, Select, MenuItem, SelectChangeEvent } from "@mui/material";
+import {
+  Select,
+  MenuItem,
+  SelectChangeEvent,
+  Box,
+  TextField,
+} from "@mui/material";
 import { ChangeEvent } from "react";
 import { SortOption } from "src/types";
 
@@ -16,12 +22,18 @@ export const Search: React.FC<SearchProps> = ({
   handleSelectOption,
 }) => {
   return (
-    <div>
-      <Input onChange={handleSearch} value={searchTerm} />
+    <Box>
+      <TextField
+        variant="outlined"
+        label="Search for products"
+        onChange={handleSearch}
+        value={searchTerm}
+        sx={{ marginRight: "5px" }}
+      />
       <Select onChange={handleSelectOption} value={sortOption}>
         <MenuItem value={SortOption.NAME}>Name</MenuItem>
         <MenuItem value={SortOption.PRICE}>Price</MenuItem>
       </Select>
-    </div>
+    </Box>
   );
 };

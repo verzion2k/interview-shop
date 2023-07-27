@@ -5,13 +5,14 @@ import {
   Accordion,
   AccordionSummary,
   AccordionDetails,
+  Box,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { ProductItem } from "@components/product/ProductItem";
 import { Fragment } from "react";
 import { FindCategoryParentPath } from "src/hooks/useFindCategoryPath";
-import { sortByAlphabetical } from "src/helpers/sortByAlphabetical";
 import { FindProductParentPath } from "src/hooks/useFindProductPath";
+import { sortByDepth } from "src/helpers/sortByDepth";
 
 export interface CategoryItemProps {
   category: ProductList;
@@ -24,13 +25,18 @@ export const CategoryItem: React.FC<CategoryItemProps> = ({
   findCategoryParentPath,
   findProductParentPath,
 }) => {
-  const sortedChildren = sortByAlphabetical(category.children);
+  const sortedChildren = sortByDepth(category.children);
 
   return (
-    <div key={category.name}>
+    <Box width="100%" sx={{ width: "100%" }}>
       <Accordion defaultExpanded>
-        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography>{category.name}</Typography>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          sx={{ backgroundColor: "darkgrey" }}
+        >
+          <Typography variant="h5">{`${
+            category.name
+          } - ${findCategoryParentPath(category.name)}`}</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Stack direction="row" flexWrap="wrap">
@@ -42,7 +48,6 @@ export const CategoryItem: React.FC<CategoryItemProps> = ({
                     findCategoryParentPath={findCategoryParentPath}
                     findProductParentPath={findProductParentPath}
                   />
-                  <p>{findCategoryParentPath(item.name)}</p>
                 </Fragment>
               ) : (
                 <Fragment key={item.name}>
@@ -56,6 +61,6 @@ export const CategoryItem: React.FC<CategoryItemProps> = ({
           </Stack>
         </AccordionDetails>
       </Accordion>
-    </div>
+    </Box>
   );
 };

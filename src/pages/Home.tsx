@@ -46,7 +46,7 @@ export const Home: React.FC = () => {
 
   return (
     <>
-      <Stack direction="row">
+      <Stack direction="row" spacing={2} mt={2}>
         <Search
           searchTerm={searchTerm}
           sortOption={sortOption}

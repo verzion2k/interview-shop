@@ -26,15 +26,18 @@ export const ProductItem: React.FC<ProductItemProps> = ({
   };
 
   return (
-    <Card sx={{ minWidth: 275 }} key={product.id}>
+    <Card
+      sx={{ minWidth: 275, margin: "10px", backgroundColor: "antiquewhite" }}
+      key={product.id}
+    >
       <CardContent>
-        <Typography variant="h5" component="div">
+        <Typography variant="h6" component="div">
           {product.name}
         </Typography>
-        <Typography variant="body2">
+        <Typography variant="subtitle1">
           {findProductParentPath(product.id)}
         </Typography>
-        <Typography variant="body2">{product.price}</Typography>
+        <Typography variant="subtitle1">{`${product.price}EUR`}</Typography>
       </CardContent>
       <CardActions>
         <Button size="small" onClick={handleAddProductToCart}>
