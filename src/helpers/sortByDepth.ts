@@ -18,5 +18,5 @@ const getDepth = (
 export const sortByDepth = (
   data: (ProductList | Product)[]
 ): (ProductList | Product)[] => {
-  return data.sort((a, b) => getDepth(a) - getDepth(b));
+  return data.sort((a, b) => getDepth(b) - getDepth(a));
 };
